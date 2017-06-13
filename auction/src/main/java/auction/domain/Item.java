@@ -1,7 +1,9 @@
 package auction.domain;
 
+import javax.persistence.Entity;
 import nl.fontys.util.Money;
 
+@Entity
 public class Item implements Comparable {
 
     private Long id;
