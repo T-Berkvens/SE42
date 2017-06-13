@@ -13,8 +13,28 @@ public class Bid {
     @Embedded
     private Money amount;
 
+    public Bid(){}
+    
     public Bid(User buyer, Money amount) {
-        //TODO
+        if(buyer == null){
+            throw new IllegalArgumentException("tried creating a Bid with buyer null");
+        }else if(amount == null){
+            throw new IllegalArgumentException("tried to create a bid with Money as null");
+        }
+        this.buyer = buyer;
+        this.amount = amount;
+    }
+
+    public void setTime(FontysTime time) {
+        this.time = time;
+    }
+
+    public void setBuyer(User buyer) {
+        this.buyer = buyer;
+    }
+
+    public void setAmount(Money amount) {
+        this.amount = amount;
     }
 
     public FontysTime getTime() {
