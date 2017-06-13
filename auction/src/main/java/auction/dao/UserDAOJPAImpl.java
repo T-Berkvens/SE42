@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
@@ -42,16 +43,26 @@ public class UserDAOJPAImpl implements UserDAO {
 
     @Override
     public List<User> findAll() {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(User.class));
-        return em.createQuery(cq).getResultList();
+        try{
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(User.class));
+            return em.createQuery(cq).getResultList();
+        }catch(NoResultException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public User findByEmail(String email) {
-        Query q = em.createNamedQuery("User.findByUserEmail", User.class);
-        q.setParameter("userEmail", email);
-        return (User) q.getSingleResult();
+        try{
+            Query q = em.createNamedQuery("User.findByUserEmail", User.class);
+            q.setParameter("userEmail", email);
+            return (User) q.getSingleResult();
+        }catch(NoResultException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
