@@ -1,11 +1,20 @@
 package auction.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import nl.fontys.util.Money;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Item.getAll", query = "select i from Item as i"),
+    @NamedQuery(name = "Item.count", query = "select count(i) from Item as i"),
+    @NamedQuery(name = "Item.findById", query = "select i from Item as i where i.id = :id"),
+    @NamedQuery(name = "Item.findByDescription", query = "select i from Item as i where i.description = :description")
+})
 public class Item implements Comparable {
-
+    @Id
     private Long id;
     private User seller;
     private Category category;
