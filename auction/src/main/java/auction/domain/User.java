@@ -2,8 +2,15 @@ package auction.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "User.getAll", query = "select u from User as u"),
+    @NamedQuery(name = "User.count", query = "select count(u) from User as u"),
+    @NamedQuery(name = "User.findByUserEmail", query = "select u from User as a where u.email = :userEmail")
+})
 public class User {
     @Id
     private Long id;
