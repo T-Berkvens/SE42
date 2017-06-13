@@ -1,10 +1,12 @@
 package auction.domain;
 
 import javax.persistence.Embedded;
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import nl.fontys.util.FontysTime;
 import nl.fontys.util.Money;
 
+@Entity
 public class Bid {
     @Embedded
     private FontysTime time;
