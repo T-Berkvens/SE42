@@ -1,8 +1,6 @@
 package auction.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -14,9 +12,7 @@ import javax.persistence.NamedQuery;
     @NamedQuery(name = "User.findByUserEmail", query = "select u from User as u where u.email = :userEmail")
 })
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    
+    @Id
     private String email;
     
     public User(){}
@@ -32,13 +28,5 @@ public class User {
     
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }

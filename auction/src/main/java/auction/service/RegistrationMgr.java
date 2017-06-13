@@ -4,6 +4,7 @@ import java.util.*;
 import auction.domain.User;
 import auction.dao.UserDAOJPAImpl;
 import auction.dao.UserDAO;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -32,6 +33,8 @@ public class RegistrationMgr {
         try {
             userDAO.create(user);
             em.getTransaction().commit();
+        } catch (EntityExistsException e){
+            user = userDAO.findByEmail(email);
         } catch (Exception e) {
             e.printStackTrace();
             em.getTransaction().rollback();
