@@ -103,12 +103,12 @@ public class Money implements Serializable, Comparable {
 
         @Override
 	public int compareTo(Object o) {
-		Money m = (Money) o;
-		if (!this.currency.equals(m.currency)) 
-				throw new RuntimeException("vergelijken van twee money-objecten met " +
-						"verschillende munteenheid is nog niet geimplementeerd");
-		if (this.cents == m.cents) return 0;
-		else if  (this.cents < m.cents) return -1;
-		else return +1;
+            Money m = (Money) o;
+            if (!this.currency.equals(m.currency)) 
+                            throw new RuntimeException("vergelijken van twee money-objecten met " +
+                                            "verschillende munteenheid is nog niet geimplementeerd");
+            if (this.cents == m.cents) return 0;
+            else if  (this.cents < m.cents) return -1;
+            else return +1;
 	}
 }

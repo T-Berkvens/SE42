@@ -22,8 +22,9 @@ public class SellerMgr {
     public Item offerItem(User seller, Category cat, String description) {
         EntityManager em = emf.createEntityManager();
         ItemDAO itemDAO = new ItemDAOJPAImpl(em);
-        em.getTransaction().begin();
+        
         Item item = new Item(seller, cat, description);
+        em.getTransaction().begin();
         try {
             itemDAO.create(item);
             em.getTransaction().commit();
