@@ -28,7 +28,7 @@ public class Item implements Comparable {
     @Embedded
     @AttributeOverrides({
      @AttributeOverride(name = "description",
-        column = @Column(name = "c_street"))})
+        column = @Column(name = "c_description"))})
     private Category category;
     private String description;
     @OneToOne
