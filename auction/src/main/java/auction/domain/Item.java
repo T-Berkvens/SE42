@@ -1,11 +1,18 @@
 package auction.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import nl.fontys.util.Money;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Item.getAll", query = "select i from Item as i"),
+    @NamedQuery(name = "Item.findByItemId", query = "select i from Item as i where i.id = :itemId")
+})
 public class Item implements Comparable {
-
+    @Id
     private Long id;
     private User seller;
     private Category category;
@@ -47,12 +54,17 @@ public class Item implements Comparable {
     }
 
     public int compareTo(Object arg0) {
-        //TODO
         return -1;
     }
 
     public boolean equals(Object o) {
-        //TODO
+        if (this.getClass() != o.getClass()) {
+            return false;
+        }
+        Item temp = (Item)o;
+        if (temp.getId().equals(this.getId())) {
+            return true;
+        }
         return false;
     }
 
