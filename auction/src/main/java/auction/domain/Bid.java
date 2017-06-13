@@ -1,16 +1,54 @@
 package auction.domain;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import nl.fontys.util.FontysTime;
 import nl.fontys.util.Money;
 
+@Entity
 public class Bid {
-
+    @Id @GeneratedValue
+    private Long id;
+    @Embedded
     private FontysTime time;
+    @ManyToOne
     private User buyer;
+    @Embedded
     private Money amount;
 
+    public Bid(){}
+    
     public Bid(User buyer, Money amount) {
-        //TODO
+        if(buyer == null){
+            throw new IllegalArgumentException("tried creating a Bid with buyer null");
+        }else if(amount == null){
+            throw new IllegalArgumentException("tried to create a bid with Money as null");
+        }
+        this.buyer = buyer;
+        this.amount = amount;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTime(FontysTime time) {
+        this.time = time;
+    }
+
+    public void setBuyer(User buyer) {
+        this.buyer = buyer;
+    }
+
+    public void setAmount(Money amount) {
+        this.amount = amount;
     }
 
     public FontysTime getTime() {

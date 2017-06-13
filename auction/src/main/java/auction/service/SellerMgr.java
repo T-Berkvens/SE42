@@ -1,11 +1,17 @@
 package auction.service;
 
+import auction.dao.ItemDAO;
+import auction.dao.ItemDAOJPAImpl;
 import auction.domain.Category;
 import auction.domain.Item;
 import auction.domain.User;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class SellerMgr {
 
+    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("auctionPU");
     /**
      * @param seller
      * @param cat
@@ -14,8 +20,24 @@ public class SellerMgr {
      *         en met de beschrijving description
      */
     public Item offerItem(User seller, Category cat, String description) {
-        // TODO 
-        return null;
+        EntityManager em = emf.createEntityManager();
+        ItemDAO itemDAO = new ItemDAOJPAImpl(em);
+        
+        Item item = new Item(seller, cat, description);
+        em.getTransaction().begin();
+        try {
+            itemDAO.create(item);
+            em.getTransaction().commit();
+        }
+        catch(Exception ex) {
+            ex.printStackTrace();
+            em.getTransaction().rollback();
+            item = null;
+        }
+        finally {
+            em.close();
+        }
+        return item;
     }
     
      /**
@@ -24,7 +46,27 @@ public class SellerMgr {
      *         false als er al geboden was op het item.
      */
     public boolean revokeItem(Item item) {
-        // TODO 
-        return false;
+        EntityManager em = emf.createEntityManager();
+        ItemDAO itemDAO = new ItemDAOJPAImpl(em);
+        em.getTransaction().begin();
+        boolean bids = true;
+        try {
+            item = itemDAO.find(item.getId());
+            
+            if (item.getHighestBid() == null)
+            {
+                bids = false;
+                itemDAO.remove(item);
+            }
+            em.getTransaction().commit();
+        }
+        catch(Exception ex) {
+            ex.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        finally {
+            em.close();
+        }
+        return !bids;
     }
 }

@@ -1,4 +1,4 @@
-package auction.service;
+package JPA;
 
 import java.util.List;
 import static org.junit.Assert.*;
@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import auction.domain.User;
+import auction.service.RegistrationMgr;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
