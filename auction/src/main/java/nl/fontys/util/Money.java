@@ -36,6 +36,7 @@ public class Money implements Serializable, Comparable {
 	 * @return de munteenheid gevolgd door een spatie en de waarde in twee
 	 *         decimalen nauwkeurig
 	 */
+        @Override
 	public String toString() {
 
 		return currency + " " + getValue();
@@ -84,6 +85,7 @@ public class Money implements Serializable, Comparable {
 		return new Money(m1.cents+m2.cents, m1.currency);
 	}
 
+        @Override
 	public boolean equals(Object o) {
 		if (!(o instanceof Money))
 			return false;
@@ -99,6 +101,7 @@ public class Money implements Serializable, Comparable {
 
 	private long cents;
 
+        @Override
 	public int compareTo(Object o) {
 		Money m = (Money) o;
 		if (!this.currency.equals(m.currency)) 

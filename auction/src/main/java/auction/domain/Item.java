@@ -88,10 +88,12 @@ public class Item implements Comparable {
         return highest;
     }
 
+    @Override
     public int compareTo(Object arg0) {
         return -1;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (this.getClass() != o.getClass()) {
             return false;
@@ -103,6 +105,7 @@ public class Item implements Comparable {
         return false;
     }
 
+    @Override
     public int hashCode() {
         //TODO
         return 0;
