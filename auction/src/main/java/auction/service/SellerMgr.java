@@ -52,11 +52,13 @@ public class SellerMgr {
         boolean bids = true;
         try {
             item = itemDAO.find(item.getId());
-            em.getTransaction().commit();
+            
             if (item.getHighestBid() == null)
             {
                 bids = false;
+                itemDAO.remove(item);
             }
+            em.getTransaction().commit();
         }
         catch(Exception ex) {
             ex.printStackTrace();

@@ -2,6 +2,7 @@ package auction.domain;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import nl.fontys.util.FontysTime;
@@ -9,7 +10,7 @@ import nl.fontys.util.Money;
 
 @Entity
 public class Bid {
-    @Id
+    @Id @GeneratedValue
     private Long id;
     @Embedded
     private FontysTime time;
