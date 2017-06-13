@@ -1,5 +1,8 @@
 package auction.domain;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +18,7 @@ import nl.fontys.util.Money;
     @NamedQuery(name = "Item.getAll", query = "select i from Item as i"),
     @NamedQuery(name = "Item.count", query = "select count(i) from Item as i"),
     @NamedQuery(name = "Item.findById", query = "select i from Item as i where i.id = :id"),
-    @NamedQuery(name = "Item.findByDescription", query = "select i from Item as i where i.description = :description")
+    @NamedQuery(name = "Item.findByDescription", query = "select i from Item as i where i.description LIKE '%:description%'")
 })
 public class Item implements Comparable {
     @Id @GeneratedValue
@@ -23,6 +26,9 @@ public class Item implements Comparable {
     @ManyToOne
     private User seller;
     @Embedded
+    @AttributeOverrides({
+     @AttributeOverride(name = "description",
+        column = @Column(name = "c_street"))})
     private Category category;
     private String description;
     @OneToOne

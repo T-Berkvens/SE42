@@ -84,7 +84,7 @@ public class AuctionMgr  {
         em.getTransaction().begin();
         Bid bid = null;
         bid = item.newBid(buyer, amount);
-            if (bid != null) {
+        if (bid != null) {
             try {
                 itemDAO.edit(item);
                 em.getTransaction().commit();

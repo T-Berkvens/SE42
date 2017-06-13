@@ -32,9 +32,6 @@ public class ItemDAOJPAImpl implements ItemDAO{
 
     @Override
     public void create(Item item) {
-        if (find(item.getId()) != null) {
-            throw new EntityExistsException();
-        }
         em.persist(item);
     }
 

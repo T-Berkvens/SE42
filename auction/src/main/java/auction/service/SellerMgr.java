@@ -25,7 +25,7 @@ public class SellerMgr {
         em.getTransaction().begin();
         Item item = new Item(seller, cat, description);
         try {
-            item = itemDAO.find(item.getId());
+            itemDAO.create(item);
             em.getTransaction().commit();
         }
         catch(Exception ex) {
