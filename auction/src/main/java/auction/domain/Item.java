@@ -1,9 +1,13 @@
 package auction.domain;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import nl.fontys.util.Money;
 
 @Entity
@@ -14,11 +18,14 @@ import nl.fontys.util.Money;
     @NamedQuery(name = "Item.findByDescription", query = "select i from Item as i where i.description = :description")
 })
 public class Item implements Comparable {
-    @Id
+    @Id @GeneratedValue
     private Long id;
+    @ManyToOne
     private User seller;
+    @Embedded
     private Category category;
     private String description;
+    @OneToOne
     private Bid highest;
 
     public Item(User seller, Category category, String description) {
