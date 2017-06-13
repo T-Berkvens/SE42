@@ -18,7 +18,7 @@ import nl.fontys.util.Money;
     @NamedQuery(name = "Item.getAll", query = "select i from Item as i"),
     @NamedQuery(name = "Item.count", query = "select count(i) from Item as i"),
     @NamedQuery(name = "Item.findById", query = "select i from Item as i where i.id = :id"),
-    @NamedQuery(name = "Item.findByDescription", query = "select i from Item as i where i.description LIKE '%:description%'")
+    @NamedQuery(name = "Item.findByDescription", query = "select i from Item as i where i.description LIKE :description")
 })
 public class Item implements Comparable {
     @Id @GeneratedValue
