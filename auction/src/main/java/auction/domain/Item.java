@@ -9,7 +9,9 @@ import nl.fontys.util.Money;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Item.getAll", query = "select i from Item as i"),
-    @NamedQuery(name = "Item.findByItemId", query = "select i from Item as i where i.id = :itemId")
+    @NamedQuery(name = "Item.count", query = "select count(i) from Item as i"),
+    @NamedQuery(name = "Item.findById", query = "select i from Item as i where i.id = :id"),
+    @NamedQuery(name = "Item.findByDescription", query = "select i from Item as i where i.description = :description")
 })
 public class Item implements Comparable {
     @Id

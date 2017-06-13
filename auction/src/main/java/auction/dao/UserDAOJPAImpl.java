@@ -1,8 +1,6 @@
 package auction.dao;
 
 import auction.domain.User;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
@@ -26,7 +24,7 @@ public class UserDAOJPAImpl implements UserDAO {
 
     @Override
     public void create(User user) {
-         if (findByEmail(user.getEmail()) != null) {
+        if (findByEmail(user.getEmail()) != null) {
             throw new EntityExistsException();
         }
         em.persist(user);
