@@ -29,4 +29,16 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    @Override
+    public boolean equals(Object toCompare) {
+        if (this.getClass() != toCompare.getClass()) {
+            return false;
+        }
+        User temp = (User)toCompare;
+        if (temp.getEmail().equals(this.email)) {
+            return true;
+        }
+        return false;
+    }
 }
