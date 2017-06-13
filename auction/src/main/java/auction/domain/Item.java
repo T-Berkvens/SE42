@@ -63,12 +63,17 @@ public class Item implements Comparable {
     }
 
     public int compareTo(Object arg0) {
-        //TODO
         return -1;
     }
 
     public boolean equals(Object o) {
-        //TODO
+        if (this.getClass() != o.getClass()) {
+            return false;
+        }
+        Item temp = (Item)o;
+        if (temp.getId().equals(this.getId())) {
+            return true;
+        }
         return false;
     }
 

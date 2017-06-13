@@ -15,7 +15,7 @@ public class AuctionMgr  {
      *         geretourneerd
      */
     public Item getItem(Long id) {
-        // TODO
+        Item item = new Item();
         return null;
     }
 
