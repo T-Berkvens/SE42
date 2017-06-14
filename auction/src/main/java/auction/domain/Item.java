@@ -32,7 +32,7 @@ public class Item implements Comparable {
         column = @Column(name = "c_description"))})
     private Category category;
     private String description;
-    @OneToOne
+    @OneToOne(mappedBy="highestItem")
     private Bid highest;
 
     public Item(){}
