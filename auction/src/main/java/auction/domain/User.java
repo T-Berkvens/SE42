@@ -2,6 +2,7 @@ package auction.domain;
 
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
@@ -17,7 +18,7 @@ import javax.persistence.OneToMany;
 public class User {
     @Id
     private String email;
-    @OneToMany(mappedBy="seller")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="seller")
     private Set<Item> offeredItems;
     
     public User(){
