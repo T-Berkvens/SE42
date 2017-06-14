@@ -3,6 +3,7 @@ package auction.domain;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -113,7 +114,6 @@ public class Item implements Comparable {
 
     @Override
     public int hashCode() {
-        //TODO
-        return 0;
+        return id.intValue();
     }
 }
