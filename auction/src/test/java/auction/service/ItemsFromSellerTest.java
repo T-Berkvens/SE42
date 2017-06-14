@@ -47,13 +47,15 @@ public class ItemsFromSellerTest {
 
        
         // test number of items belonging to user1
-        assertEquals(0, user1.numberOfOfferedItems());
+        //assertEquals(0, user1.numberOfOfferedItems());
         assertEquals(1, user1.numberOfOfferedItems());
         
         /*
          *  expected: which one of te above two assertions do you expect to be true?
          *  QUESTION:
          *    Explain the result in terms of entity manager and persistance context.
+        * An item cannot exist without having a user. It is a OneToMany relation, meaning
+        * that if the item get's added it should also be added to the user.
          */
          
          
