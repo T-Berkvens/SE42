@@ -1,9 +1,12 @@
 package auction.domain;
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 @Entity
 @NamedQueries({
@@ -14,12 +17,22 @@ import javax.persistence.NamedQuery;
 public class User {
     @Id
     private String email;
+    @OneToMany(mappedBy="seller")
+    private Set<Item> offeredItems;
     
-    public User(){}
+    public User(){
+        offeredItems = new HashSet<Item>();
+    }
 
     public User(String email) {
         this.email = email;
-
+        offeredItems = new HashSet<Item>();
+    }
+    
+    public Item createItem(Category category, String description){
+        Item newItem = new Item(this, category, description);
+        addItem(newItem);
+        return newItem;
     }
 
     public String getEmail() {
@@ -28,6 +41,18 @@ public class User {
     
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    private void addItem(Item i){
+        offeredItems.add(i);
+    }
+    
+    public Set<Item> getOfferedItems() {
+        return offeredItems;
+    }
+    
+    public int numberOfOfferedItems(){
+        return offeredItems.size();
     }
     
     @Override

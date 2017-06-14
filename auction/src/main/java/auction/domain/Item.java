@@ -3,6 +3,7 @@ package auction.domain;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class Item implements Comparable {
         column = @Column(name = "c_description"))})
     private Category category;
     private String description;
-    @OneToOne
+    @OneToOne(mappedBy="item")
     private Bid highest;
 
     public Item(){}
@@ -58,14 +59,6 @@ public class Item implements Comparable {
         this.description = description;
     }
 
-    public Bid getHighest() {
-        return highest;
-    }
-
-    public void setHighest(Bid highest) {
-        this.highest = highest;
-    }
-
     public Long getId() {
         return id;
     }
@@ -90,7 +83,7 @@ public class Item implements Comparable {
         if (highest != null && highest.getAmount().compareTo(amount) >= 0) {
             return null;
         }
-        highest = new Bid(buyer, amount);
+        highest = new Bid(this, buyer, amount);
         return highest;
     }
 
@@ -113,7 +106,6 @@ public class Item implements Comparable {
 
     @Override
     public int hashCode() {
-        //TODO
-        return 0;
+        return seller.hashCode() * category.hashCode() * description.hashCode();
     }
 }

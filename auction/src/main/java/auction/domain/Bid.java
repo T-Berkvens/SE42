@@ -1,10 +1,13 @@
 package auction.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import nl.fontys.util.FontysTime;
 import nl.fontys.util.Money;
 
@@ -18,15 +21,20 @@ public class Bid {
     private User buyer;
     @Embedded
     private Money amount;
+    @OneToOne @JoinColumn(nullable = false)
+    private Item item;
+
+    
 
     public Bid(){}
     
-    public Bid(User buyer, Money amount) {
+    public Bid(Item item, User buyer, Money amount) {
         if(buyer == null){
             throw new IllegalArgumentException("tried creating a Bid with buyer null");
         }else if(amount == null){
             throw new IllegalArgumentException("tried to create a bid with Money as null");
         }
+        this.item = item;
         this.buyer = buyer;
         this.amount = amount;
     }
@@ -61,5 +69,13 @@ public class Bid {
 
     public Money getAmount() {
         return amount;
+    }
+    
+    public Item getItem() {
+        return item;
+    }
+
+    public void setHighestItem(Item item) {
+        this.item = item;
     }
 }
