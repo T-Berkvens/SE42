@@ -1,10 +1,12 @@
 package auction.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import nl.fontys.util.FontysTime;
 import nl.fontys.util.Money;
 
@@ -18,6 +20,10 @@ public class Bid {
     private User buyer;
     @Embedded
     private Money amount;
+    @OneToOne @Column(nullable = false)
+    private Item highestItem;
+
+    
 
     public Bid(){}
     
@@ -61,5 +67,13 @@ public class Bid {
 
     public Money getAmount() {
         return amount;
+    }
+    
+    public Item getHighestItem() {
+        return highestItem;
+    }
+
+    public void setHighestItem(Item highestItem) {
+        this.highestItem = highestItem;
     }
 }
