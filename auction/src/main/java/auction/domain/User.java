@@ -29,9 +29,10 @@ public class User {
         offeredItems = new HashSet<Item>();
     }
     
-    public void createItem(Category category, String description){
+    public Item createItem(Category category, String description){
         Item newItem = new Item(this, category, description);
         addItem(newItem);
+        return newItem;
     }
 
     public String getEmail() {

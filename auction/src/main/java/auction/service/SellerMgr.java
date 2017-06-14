@@ -2,6 +2,8 @@ package auction.service;
 
 import auction.dao.ItemDAO;
 import auction.dao.ItemDAOJPAImpl;
+import auction.dao.UserDAO;
+import auction.dao.UserDAOJPAImpl;
 import auction.domain.Category;
 import auction.domain.Item;
 import auction.domain.User;
@@ -22,11 +24,14 @@ public class SellerMgr {
     public Item offerItem(User seller, Category cat, String description) {
         EntityManager em = emf.createEntityManager();
         ItemDAO itemDAO = new ItemDAOJPAImpl(em);
+        UserDAO userDAO = new UserDAOJPAImpl(em);
         
-        Item item = new Item(seller, cat, description);
+        Item item;
+        item = seller.createItem(cat, description);
         em.getTransaction().begin();
         try {
             itemDAO.create(item);
+            userDAO.edit(seller);
             em.getTransaction().commit();
         }
         catch(Exception ex) {
@@ -48,15 +53,16 @@ public class SellerMgr {
     public boolean revokeItem(Item item) {
         EntityManager em = emf.createEntityManager();
         ItemDAO itemDAO = new ItemDAOJPAImpl(em);
+        UserDAO userDAO = new UserDAOJPAImpl(em);
         em.getTransaction().begin();
         boolean bids = true;
         try {
             item = itemDAO.find(item.getId());
-            
             if (item.getHighestBid() == null)
             {
                 bids = false;
                 itemDAO.remove(item);
+                userDAO.edit(item.getSeller());
             }
             em.getTransaction().commit();
         }
