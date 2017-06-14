@@ -1,5 +1,6 @@
 package JPA;
 
+import auction.domain.Bid;
 import org.junit.Ignore;
 import javax.persistence.*;
 import util.DatabaseCleaner;
@@ -11,6 +12,7 @@ import auction.service.RegistrationMgr;
 import auction.service.SellerMgr;
 import java.util.Iterator;
 import java.util.Set;
+import nl.fontys.util.Money;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -101,6 +103,7 @@ public class ItemsFromSellerTest {
         assertFalse(it11.size() > 1);
 
         // Explain difference in above two tests for te iterator of 'same' user
+        // The second test receives the user from the database, the first one just uses the one we just created locally.
 
         User user20 = registrationMgr.getUser(email);
         Item item20 = sellerMgr.offerItem(user20, cat, omsch2);
@@ -111,5 +114,26 @@ public class ItemsFromSellerTest {
         User user30 = item20.getSeller();
         Set<Item> it30 = user30.getOfferedItems();
         assertTrue(it30.size() > 1);
+    }
+    
+    @Test
+//    @Ignore
+    public void bidFromItemTest() {
+        String email1 = "ifu1@nl";
+        String email2 = "owijef@nl";
+        String omsch1 = "omsch_ifu1";
+        String omsch2 = "omsch_ifu2";
+
+        Category cat = new Category("cat2");
+
+        User user1 = registrationMgr.registerUser(email1);
+        User user2 = registrationMgr.registerUser(email2);
+        Item item1 = sellerMgr.offerItem(user1, cat, omsch1);
+        Bid bid = auctionMgr.newBid(item1, user2, new Money(10, "euro"));
+        Bid bid2 = auctionMgr.getItem(item1.getId()).getHighestBid();
+        
+        // adding a bid to item1, getting bid2 from database based on the item and comparing their users
+        assertEquals(bid2.getItem().getSeller(), user1);
+        
     }
 }
