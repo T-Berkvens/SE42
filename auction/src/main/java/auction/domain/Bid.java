@@ -5,6 +5,7 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import nl.fontys.util.FontysTime;
@@ -20,7 +21,7 @@ public class Bid {
     private User buyer;
     @Embedded
     private Money amount;
-    @OneToOne @Column(nullable = false)
+    @OneToOne @JoinColumn(nullable = false)
     private Item item;
 
     

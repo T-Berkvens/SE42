@@ -111,6 +111,5 @@ public class ItemsFromSellerTest {
         User user30 = item20.getSeller();
         Set<Item> it30 = user30.getOfferedItems();
         assertTrue(it30.size() > 1);
-
     }
 }
