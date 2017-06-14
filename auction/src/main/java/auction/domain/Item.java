@@ -114,6 +114,6 @@ public class Item implements Comparable {
 
     @Override
     public int hashCode() {
-        return id.intValue();
+        return seller.hashCode() * category.hashCode() * description.hashCode();
     }
 }

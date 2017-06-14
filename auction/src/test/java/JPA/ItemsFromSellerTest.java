@@ -1,4 +1,4 @@
-package auction.service;
+package JPA;
 
 import org.junit.Ignore;
 import javax.persistence.*;
@@ -6,6 +6,9 @@ import util.DatabaseCleaner;
 import auction.domain.Category;
 import auction.domain.Item;
 import auction.domain.User;
+import auction.service.AuctionMgr;
+import auction.service.RegistrationMgr;
+import auction.service.SellerMgr;
 import java.util.Iterator;
 import java.util.Set;
 import org.junit.Before;
@@ -44,12 +47,10 @@ public class ItemsFromSellerTest {
 
         Category cat = new Category("cat2");
         Item item1 = sellerMgr.offerItem(user1, cat, omsch1);
-
        
         // test number of items belonging to user1
         //assertEquals(0, user1.numberOfOfferedItems());
         assertEquals(1, user1.numberOfOfferedItems());
-        
         /*
          *  expected: which one of te above two assertions do you expect to be true?
          *  QUESTION:
@@ -57,10 +58,7 @@ public class ItemsFromSellerTest {
         * An item cannot exist without having a user. It is a OneToMany relation, meaning
         * that if the item get's added it should also be added to the user.
          */
-         
-         
         assertEquals(1, item1.getSeller().numberOfOfferedItems());
-
 
         User user2 = registrationMgr.getUser(email);
         assertEquals(1, user2.numberOfOfferedItems());
@@ -72,17 +70,13 @@ public class ItemsFromSellerTest {
 
         User userWithItem = item2.getSeller();
         assertEquals(2, userWithItem.numberOfOfferedItems());
-        assertEquals(3, userWithItem.numberOfOfferedItems());
+        //assertEquals(3, userWithItem.numberOfOfferedItems());
         /*
          *  expected: which one of te above two assertions do you expect to be true?
-         *  QUESTION:
-         *    Explain the result in terms of entity manager and persistance context.
+         *  Er worden 2 items toegevoegd aan offereditems van de user met email 'email' , user3 heeft dus deze 2 items aangeboden.
          */
-        
-        
         assertNotSame(user3, userWithItem);
         assertEquals(user3, userWithItem);
-
     }
 
     @Test
