@@ -21,18 +21,19 @@ public class Bid {
     @Embedded
     private Money amount;
     @OneToOne @Column(nullable = false)
-    private Item highestItem;
+    private Item item;
 
     
 
     public Bid(){}
     
-    public Bid(User buyer, Money amount) {
+    public Bid(Item item, User buyer, Money amount) {
         if(buyer == null){
             throw new IllegalArgumentException("tried creating a Bid with buyer null");
         }else if(amount == null){
             throw new IllegalArgumentException("tried to create a bid with Money as null");
         }
+        this.item = item;
         this.buyer = buyer;
         this.amount = amount;
     }
@@ -69,11 +70,11 @@ public class Bid {
         return amount;
     }
     
-    public Item getHighestItem() {
-        return highestItem;
+    public Item getItem() {
+        return item;
     }
 
-    public void setHighestItem(Item highestItem) {
-        this.highestItem = highestItem;
+    public void setHighestItem(Item item) {
+        this.item = item;
     }
 }
