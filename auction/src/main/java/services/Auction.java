@@ -5,10 +5,13 @@
  */
 package services;
 
+import auction.service.AuctionMgr;
+
 /**
  *
  * @author Arno
  */
 public class Auction {
+    AuctionMgr auctionMgr;
     
 }
