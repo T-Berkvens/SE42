@@ -5,6 +5,7 @@
  */
 package webService;
 
+import javax.jws.WebService;
 import services.Auction;
 import services.Registration;
 
@@ -12,9 +13,10 @@ import services.Registration;
  *
  * @author Arno
  */
+@WebService
 public class WebAuction {
-    private Auction actuion = new Auction();
-    private Registration registration = new Registration();
+    private final Auction actuion = new Auction();
+    private final Registration registration = new Registration();
     
     //#ToDo add all methods from the Registration and Auction classes
 }
