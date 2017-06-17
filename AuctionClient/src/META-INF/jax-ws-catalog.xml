@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/WebAuction?wsdl" uri="wsdl/localhost_8080/WebAuction.wsdl"/>
+    <system systemId="http://localhost:8080/WebAuction?xsd=1" uri="wsdl/localhost_8080/WebAuction.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/WebRegistration?wsdl" uri="wsdl/localhost_8080/WebRegistration.wsdl"/>
+    <system systemId="http://localhost:8080/WebRegistration?xsd=1" uri="wsdl/localhost_8080/WebRegistration.xsd_1.xsd"/>
+</catalog>
