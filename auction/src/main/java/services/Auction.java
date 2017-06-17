@@ -9,6 +9,6 @@ package services;
  *
  * @author Arno
  */
-public class Action {
+public class Auction {
     
 }
