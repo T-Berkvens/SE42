@@ -6,9 +6,8 @@
 package publisher;
 
 import javax.xml.ws.Endpoint;
-import services.Auction;
-import services.Registration;
-import webService.WebAuction;
+import web.Auction;
+import web.Registration;
 
 /**
  *
