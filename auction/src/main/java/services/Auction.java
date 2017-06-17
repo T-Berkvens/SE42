@@ -5,13 +5,36 @@
  */
 package services;
 
+import auction.domain.Bid;
+import auction.domain.Item;
+import auction.domain.User;
 import auction.service.AuctionMgr;
+import auction.service.SellerMgr;
+import java.util.List;
+import javax.jws.WebService;
+import nl.fontys.util.Money;
 
 /**
  *
  * @author Arno
  */
+@WebService
 public class Auction {
-    AuctionMgr auctionMgr;
+    final private AuctionMgr auctionMgr = new AuctionMgr();
+    final private SellerMgr sellerMgr = new SellerMgr();
     
+    public Item getItem(long id)
+    {
+        return auctionMgr.getItem(id);
+    }
+    
+    public List<Item> findItemByDescription(String description)
+    {
+        return auctionMgr.findItemByDescription(description);
+    }
+    
+    public Bid newBid(Item item, User buyer, Money amount)
+    {
+        return auctionMgr.newBid(item, buyer, amount);
+    }
 }
