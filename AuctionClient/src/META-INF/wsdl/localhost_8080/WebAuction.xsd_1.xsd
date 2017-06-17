@@ -64,7 +64,10 @@
 </xs:complexType>
 
 <xs:complexType name="money">
-<xs:sequence></xs:sequence>
+<xs:sequence>
+<xs:element name="cents" type="xs:long"></xs:element>
+<xs:element name="currency" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="fontysTime">

@@ -16,23 +16,6 @@
             <classpath path="${libs.jaxws21.classpath}"/>
         </taskdef>
     </target>
-    <target name="wsimport-client-WebRegistration" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/WebRegistration"/>
-        <property name="wsdl-WebRegistration" location="xml-resources/web-service-references/WebRegistration/wsdl/localhost_8080/WebRegistration.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/WebRegistration" destdir="${build.generated.dir}/jax-wsCache/WebRegistration" wsdl="${wsdl-WebRegistration}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/WebRegistration?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${wsdl-WebRegistration}"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/WebRegistration"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/WebRegistration">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-WebRegistration" depends="-init-project">
-        <delete dir="${build.generated.dir}/jax-wsCache/WebRegistration"/>
-        <delete dir="${build.generated.sources.dir}/jax-ws/web"/>
-    </target>
     <target name="wsimport-client-WebAuction" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/WebAuction"/>
         <property name="wsdl-WebAuction" location="xml-resources/web-service-references/WebAuction/wsdl/localhost_8080/WebAuction.wsdl"/>
@@ -50,5 +33,22 @@
         <delete dir="${build.generated.dir}/jax-wsCache/WebAuction"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/web"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-WebRegistration, wsimport-client-WebAuction"/>
+    <target name="wsimport-client-WebRegistration" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/WebRegistration"/>
+        <property name="wsdl-WebRegistration" location="xml-resources/web-service-references/WebRegistration/wsdl/localhost_8080/WebRegistration.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/WebRegistration" destdir="${build.generated.dir}/jax-wsCache/WebRegistration" wsdl="${wsdl-WebRegistration}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/WebRegistration?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${wsdl-WebRegistration}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/WebRegistration"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/WebRegistration">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-WebRegistration" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/WebRegistration"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/web"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-WebAuction, wsimport-client-WebRegistration"/>
 </project>
