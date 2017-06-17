@@ -26,6 +26,7 @@ public class JPAAuctionMgrTest {
         registrationMgr = new RegistrationMgr();
         auctionMgr = new AuctionMgr();
         sellerMgr = new SellerMgr();
+        auctionMgr.cleanDB();
     }
 
     @Test

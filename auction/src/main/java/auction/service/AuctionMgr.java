@@ -83,6 +83,7 @@ public class AuctionMgr  {
         ItemDAO itemDAO = new ItemDAOJPAImpl(em);
         em.getTransaction().begin();
         Bid bid = null;
+        item = getItem(item.getId());
         bid = item.newBid(buyer, amount);
         if (bid != null) {
             try {

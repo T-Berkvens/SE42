@@ -12,7 +12,7 @@ import auction.service.RegistrationMgr;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import util.DatabaseCleaner;
+import nl.fontys.util.DatabaseCleaner;
 
 public class JPARegistrationMgrTest {
 

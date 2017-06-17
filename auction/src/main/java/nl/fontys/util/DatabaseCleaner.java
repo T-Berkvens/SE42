@@ -1,6 +1,5 @@
-package util;
+package nl.fontys.util;
 
-import nl.fontys.util.*;
 import auction.domain.Bid;
 import auction.domain.Item;
 import auction.domain.User;

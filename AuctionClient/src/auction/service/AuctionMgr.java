@@ -34,6 +34,12 @@ public class AuctionMgr  {
         web.Auction port = service.getAuctionPort();
         return port.getMoney(arg0, arg1);
     }
+
+    public static void cleanDB() {
+        web.AuctionService service = new web.AuctionService();
+        web.Auction port = service.getAuctionPort();
+        port.cleanDB();
+    }
     
    
 }

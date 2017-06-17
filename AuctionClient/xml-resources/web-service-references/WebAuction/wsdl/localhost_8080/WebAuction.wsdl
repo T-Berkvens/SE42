@@ -16,6 +16,30 @@
 <message name="findItemByDescriptionResponse">
 <part name="parameters" element="tns:findItemByDescriptionResponse"></part>
 </message>
+<message name="revokeItem">
+<part name="parameters" element="tns:revokeItem"></part>
+</message>
+<message name="revokeItemResponse">
+<part name="parameters" element="tns:revokeItemResponse"></part>
+</message>
+<message name="newBid">
+<part name="parameters" element="tns:newBid"></part>
+</message>
+<message name="newBidResponse">
+<part name="parameters" element="tns:newBidResponse"></part>
+</message>
+<message name="cleanDB">
+<part name="parameters" element="tns:cleanDB"></part>
+</message>
+<message name="cleanDBResponse">
+<part name="parameters" element="tns:cleanDBResponse"></part>
+</message>
+<message name="getMoney">
+<part name="parameters" element="tns:getMoney"></part>
+</message>
+<message name="getMoneyResponse">
+<part name="parameters" element="tns:getMoneyResponse"></part>
+</message>
 <message name="offerItem">
 <part name="parameters" element="tns:offerItem"></part>
 </message>
@@ -28,24 +52,6 @@
 <message name="getCategoryResponse">
 <part name="parameters" element="tns:getCategoryResponse"></part>
 </message>
-<message name="getMoney">
-<part name="parameters" element="tns:getMoney"></part>
-</message>
-<message name="getMoneyResponse">
-<part name="parameters" element="tns:getMoneyResponse"></part>
-</message>
-<message name="newBid">
-<part name="parameters" element="tns:newBid"></part>
-</message>
-<message name="newBidResponse">
-<part name="parameters" element="tns:newBidResponse"></part>
-</message>
-<message name="revokeItem">
-<part name="parameters" element="tns:revokeItem"></part>
-</message>
-<message name="revokeItemResponse">
-<part name="parameters" element="tns:revokeItemResponse"></part>
-</message>
 <portType name="Auction">
 <operation name="getItem">
 <input wsam:Action="http://web/Auction/getItemRequest" message="tns:getItem"></input>
@@ -55,6 +61,22 @@
 <input wsam:Action="http://web/Auction/findItemByDescriptionRequest" message="tns:findItemByDescription"></input>
 <output wsam:Action="http://web/Auction/findItemByDescriptionResponse" message="tns:findItemByDescriptionResponse"></output>
 </operation>
+<operation name="revokeItem">
+<input wsam:Action="http://web/Auction/revokeItemRequest" message="tns:revokeItem"></input>
+<output wsam:Action="http://web/Auction/revokeItemResponse" message="tns:revokeItemResponse"></output>
+</operation>
+<operation name="newBid">
+<input wsam:Action="http://web/Auction/newBidRequest" message="tns:newBid"></input>
+<output wsam:Action="http://web/Auction/newBidResponse" message="tns:newBidResponse"></output>
+</operation>
+<operation name="cleanDB">
+<input wsam:Action="http://web/Auction/cleanDBRequest" message="tns:cleanDB"></input>
+<output wsam:Action="http://web/Auction/cleanDBResponse" message="tns:cleanDBResponse"></output>
+</operation>
+<operation name="getMoney">
+<input wsam:Action="http://web/Auction/getMoneyRequest" message="tns:getMoney"></input>
+<output wsam:Action="http://web/Auction/getMoneyResponse" message="tns:getMoneyResponse"></output>
+</operation>
 <operation name="offerItem">
 <input wsam:Action="http://web/Auction/offerItemRequest" message="tns:offerItem"></input>
 <output wsam:Action="http://web/Auction/offerItemResponse" message="tns:offerItemResponse"></output>
@@ -62,18 +84,6 @@
 <operation name="getCategory">
 <input wsam:Action="http://web/Auction/getCategoryRequest" message="tns:getCategory"></input>
 <output wsam:Action="http://web/Auction/getCategoryResponse" message="tns:getCategoryResponse"></output>
-</operation>
-<operation name="getMoney">
-<input wsam:Action="http://web/Auction/getMoneyRequest" message="tns:getMoney"></input>
-<output wsam:Action="http://web/Auction/getMoneyResponse" message="tns:getMoneyResponse"></output>
-</operation>
-<operation name="newBid">
-<input wsam:Action="http://web/Auction/newBidRequest" message="tns:newBid"></input>
-<output wsam:Action="http://web/Auction/newBidResponse" message="tns:newBidResponse"></output>
-</operation>
-<operation name="revokeItem">
-<input wsam:Action="http://web/Auction/revokeItemRequest" message="tns:revokeItem"></input>
-<output wsam:Action="http://web/Auction/revokeItemResponse" message="tns:revokeItemResponse"></output>
 </operation>
 </portType>
 <binding name="AuctionPortBinding" type="tns:Auction">
@@ -96,25 +106,7 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
-<operation name="offerItem">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal"></soap:body>
-</input>
-<output>
-<soap:body use="literal"></soap:body>
-</output>
-</operation>
-<operation name="getCategory">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal"></soap:body>
-</input>
-<output>
-<soap:body use="literal"></soap:body>
-</output>
-</operation>
-<operation name="getMoney">
+<operation name="revokeItem">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>
@@ -132,7 +124,34 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
-<operation name="revokeItem">
+<operation name="cleanDB">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal"></soap:body>
+</input>
+<output>
+<soap:body use="literal"></soap:body>
+</output>
+</operation>
+<operation name="getMoney">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal"></soap:body>
+</input>
+<output>
+<soap:body use="literal"></soap:body>
+</output>
+</operation>
+<operation name="offerItem">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal"></soap:body>
+</input>
+<output>
+<soap:body use="literal"></soap:body>
+</output>
+</operation>
+<operation name="getCategory">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>

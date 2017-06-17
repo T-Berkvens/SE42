@@ -87,6 +87,8 @@ public class Item implements Comparable {
     }
 
     public Bid newBid(User buyer, Money amount) {
+        if (highest != null)
+        System.out.println("highest amount: "+ highest.getAmount() + ", andere : "+amount);
         if (highest != null && highest.getAmount().compareTo(amount) >= 0) {
             return null;
         }

@@ -11,8 +11,15 @@ import auction.domain.Item;
 import auction.domain.User;
 import auction.service.AuctionMgr;
 import auction.service.SellerMgr;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jws.WebService;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import nl.fontys.util.DatabaseCleaner;
 import nl.fontys.util.Money;
 
 /**
@@ -57,5 +64,17 @@ public class Auction {
     public Money getMoney(long cents, String currency)
     {
         return new Money(cents, currency);
+    }
+    
+    public void cleanDB()
+    {
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("auctionPU");
+           EntityManager em = emf.createEntityManager();
+           DatabaseCleaner cleaner = new DatabaseCleaner(em);
+        try {
+            cleaner.clean();
+        } catch (SQLException ex) {
+            Logger.getLogger(Auction.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
