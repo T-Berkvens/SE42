@@ -12,13 +12,33 @@
 
 <xs:element name="newBidResponse" type="tns:newBidResponse"></xs:element>
 
-<xs:complexType name="getItem">
+<xs:element name="offerItem" type="tns:offerItem"></xs:element>
+
+<xs:element name="offerItemResponse" type="tns:offerItemResponse"></xs:element>
+
+<xs:element name="revokeItem" type="tns:revokeItem"></xs:element>
+
+<xs:element name="revokeItemResponse" type="tns:revokeItemResponse"></xs:element>
+
+<xs:complexType name="offerItem">
 <xs:sequence>
-<xs:element name="arg0" type="xs:long"></xs:element>
+<xs:element name="arg0" type="tns:user" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="tns:category" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getItemResponse">
+<xs:complexType name="user">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="category">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="offerItemResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:item" minOccurs="0"></xs:element>
 </xs:sequence>
@@ -34,10 +54,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="category">
-<xs:sequence></xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="bid">
 <xs:sequence>
 <xs:element name="amount" type="tns:money" minOccurs="0"></xs:element>
@@ -51,14 +67,20 @@
 <xs:sequence></xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="user">
+<xs:complexType name="fontysTime">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getItem">
 <xs:sequence>
-<xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg0" type="xs:long"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="fontysTime">
-<xs:sequence></xs:sequence>
+<xs:complexType name="getItemResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:item" minOccurs="0"></xs:element>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="newBid">
@@ -84,6 +106,18 @@
 <xs:complexType name="findItemByDescriptionResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:item" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="revokeItem">
+<xs:sequence>
+<xs:element name="arg0" type="tns:item" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="revokeItemResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"></xs:element>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>
