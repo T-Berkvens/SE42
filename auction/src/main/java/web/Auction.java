@@ -6,6 +6,7 @@
 package web;
 
 import auction.domain.Bid;
+import auction.domain.Category;
 import auction.domain.Item;
 import auction.domain.User;
 import auction.service.AuctionMgr;
@@ -36,5 +37,15 @@ public class Auction {
     public Bid newBid(Item item, User buyer, Money amount)
     {
         return auctionMgr.newBid(item, buyer, amount);
+    }
+    
+    public Item offerItem(User seller, Category cat, String description)
+    {
+        return sellerMgr.offerItem(seller, cat, description);
+    }
+    
+    public boolean revokeItem(Item item)
+    {
+        return sellerMgr.revokeItem(item);
     }
 }
