@@ -48,4 +48,14 @@ public class Auction {
     {
         return sellerMgr.revokeItem(item);
     }
+    
+    public Category getCategory(String description)
+    {
+        return new Category(description);
+    }
+    
+    public Money getMoney(long cents, String currency)
+    {
+        return new Money(cents, currency);
+    }
 }

@@ -4,9 +4,17 @@
 
 <xs:element name="findItemByDescriptionResponse" type="tns:findItemByDescriptionResponse"></xs:element>
 
+<xs:element name="getCategory" type="tns:getCategory"></xs:element>
+
+<xs:element name="getCategoryResponse" type="tns:getCategoryResponse"></xs:element>
+
 <xs:element name="getItem" type="tns:getItem"></xs:element>
 
 <xs:element name="getItemResponse" type="tns:getItemResponse"></xs:element>
+
+<xs:element name="getMoney" type="tns:getMoney"></xs:element>
+
+<xs:element name="getMoneyResponse" type="tns:getMoneyResponse"></xs:element>
 
 <xs:element name="newBid" type="tns:newBid"></xs:element>
 
@@ -74,6 +82,19 @@
 <xs:sequence></xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="getMoney">
+<xs:sequence>
+<xs:element name="arg0" type="xs:long"></xs:element>
+<xs:element name="arg1" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getMoneyResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:money" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="getItem">
 <xs:sequence>
 <xs:element name="arg0" type="xs:long"></xs:element>
@@ -83,6 +104,18 @@
 <xs:complexType name="getItemResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:item" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCategory">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCategoryResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:category" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 

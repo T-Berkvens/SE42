@@ -35,7 +35,7 @@ public class JPASellerMgrTest {
         String omsch = "omsch";
 
         User user1 = registrationMgr.registerUser("xx@nl");
-        Category cat = new Category("cat1");
+        web.Category cat = auctionMgr.getCategory("cat1");
         Item item1 = sellerMgr.offerItem(user1, cat, omsch);
         assertEquals(omsch, item1.getDescription());
         assertNotNull(item1.getId());
@@ -52,7 +52,7 @@ public class JPASellerMgrTest {
     
         User seller = registrationMgr.registerUser("sel@nl");
         User buyer = registrationMgr.registerUser("buy@nl");
-        Category cat = new Category("cat1");
+        web.Category cat = auctionMgr.getCategory("cat1");
         
             // revoke before bidding
         Item item1 = sellerMgr.offerItem(seller, cat, omsch);
@@ -63,7 +63,8 @@ public class JPASellerMgrTest {
         
             // revoke after bid has been made
         Item item2 = sellerMgr.offerItem(seller, cat, omsch2);
-        auctionMgr.newBid(item2, buyer, new Money(100, "Euro"));
+        web.Money mon1 = auctionMgr.getMoney(100, "eur");
+        auctionMgr.newBid(item2, buyer, mon1);
         boolean res2 = sellerMgr.revokeItem(item2);
         assertFalse(res2);
         int count2 = auctionMgr.findItemByDescription(omsch2).size();

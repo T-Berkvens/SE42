@@ -1,6 +1,5 @@
 
 
-import auction.domain.Category;
 import auction.service.*;
 import static org.junit.Assert.*;
 
@@ -13,6 +12,7 @@ import web.Bid;
 import web.Item;
 import web.User;
 import java.util.ArrayList;
+import web.Category;
 
 public class JPAAuctionMgrTest {
 
@@ -34,7 +34,7 @@ public class JPAAuctionMgrTest {
         String omsch = "omsch";
 
         User seller1 = registrationMgr.registerUser(email);
-        Category cat = new Category("cat2");
+        web.Category cat = auctionMgr.getCategory("cat2");
         Item item1 = sellerMgr.offerItem(seller1, cat, omsch);
         Item item2 = auctionMgr.getItem(item1.getId());
         assertEquals(omsch, item2.getDescription());
@@ -50,7 +50,7 @@ public class JPAAuctionMgrTest {
 
         User seller3 = registrationMgr.registerUser(email3);
         User seller4 = registrationMgr.registerUser(email4);
-        Category cat = new Category("cat3");
+        web.Category cat = auctionMgr.getCategory("cat3");
         Item item1 = sellerMgr.offerItem(seller3, cat, omsch);
         Item item2 = sellerMgr.offerItem(seller4, cat, omsch);
 
@@ -73,18 +73,21 @@ public class JPAAuctionMgrTest {
         User buyer = registrationMgr.registerUser(emailb);
         User buyer2 = registrationMgr.registerUser(emailb2);
         // eerste bod
-        Category cat = new Category("cat9");
+        Category cat = new Category();
+        
         Item item1 = sellerMgr.offerItem(seller, cat, omsch);
-        Money mon1 = auctionMgr.getMoney(10, "eur");
+        web.Money mon1 = auctionMgr.getMoney(10, "eur");
         Bid new1 = auctionMgr.newBid(item1, buyer, mon1);
         assertEquals(emailb, new1.getBuyer().getEmail());
 
         // lager bod
-        Bid new2 = auctionMgr.newBid(item1, buyer2, new Money(9, "eur"));
+        web.Money mon2 = auctionMgr.getMoney(9, "eur");
+        Bid new2 = auctionMgr.newBid(item1, buyer2, mon2);
         assertNull(new2);
 
         // hoger bod
-        Bid new3 = auctionMgr.newBid(item1, buyer2, new Money(11, "eur"));
+        web.Money mon3 = auctionMgr.getMoney(11, "eur");
+        Bid new3 = auctionMgr.newBid(item1, buyer2, mon3);
         assertEquals(emailb2, new3.getBuyer().getEmail());
     }
 }
