@@ -30,6 +30,16 @@ public class Money implements Serializable, Comparable {
 		this.cents=cents;
 		this.currency = currency;
 	}
+        
+        public void setCents(long cents)
+        {
+            this.cents = cents;
+        }
+        
+        public void setCurrency(String currency)
+        {
+            this.currency = currency;
+        }
 
 	/**
 	 * 
