@@ -12,6 +12,7 @@ import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.Signature;
 import java.security.spec.PKCS8EncodedKeySpec;
+import java.util.Scanner;
 
 /**
  *
@@ -31,7 +32,7 @@ public class SignApplication {
             getInputFile();
             //voor de output:
             //Maak handtekening aan hand van SHA1withRSA
-            getSignature();
+            getSignature(signedBy);
             //schrijf weg:
             saveFile(signedBy);
         }catch(Exception ex){
@@ -50,10 +51,10 @@ public class SignApplication {
         input = Files.readAllBytes(new File("../INPUT.EXT").toPath());
     }
     
-    public void getSignature() throws Exception{
+    public void getSignature(String author) throws Exception{
         signature = Signature.getInstance("SHA1withRSA");
         signature.initSign(privateKey);
-        signature.update("bert".getBytes());
+        signature.update(author.getBytes());
         signatureData = signature.sign();
     }
     
@@ -75,7 +76,10 @@ public class SignApplication {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new SignApplication("bert");
+        System.out.println("Enter the name you want to sign the file with:");
+        Scanner scanner = new Scanner(System.in);
+        String name = scanner.nextLine();
+        new SignApplication(name);
     }
     
 }
