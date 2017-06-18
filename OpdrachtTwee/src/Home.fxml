@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller=".HomeController">
+  <children>
+    <TextField id="txtPassword" layoutX="138.0" layoutY="25.0" prefWidth="200.0" />
+    <TextArea id="txtContent" layoutX="27.0" layoutY="70.0" prefHeight="316.0" prefWidth="559.0" wrapText="true" />
+    <Label layoutX="27.0" layoutY="28.0" text="Enter your password:" />
+    <Button id="btnEncrypt" layoutX="345.0" layoutY="26.0" mnemonicParsing="false" text="Encrypt and store" />
+    <Button id="btnDecrypt" layoutX="458.0" layoutY="26.0" mnemonicParsing="false" text="Decrypt and retrieve" />
+  </children>
+</AnchorPane>
