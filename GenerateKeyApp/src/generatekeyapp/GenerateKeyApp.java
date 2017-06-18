@@ -5,6 +5,8 @@
  */
 package generatekeyapp;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
@@ -22,20 +24,33 @@ public class GenerateKeyApp {
     private PrivateKey privateKey;
     
     public GenerateKeyApp(){
-        GenerateKeys(1024);
+        try{
+            GenerateKeys(1024);
+            writeToFile("publicKey.txt", publicKey.getEncoded());
+            writeToFile("privateKey.txt", privateKey.getEncoded());
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        
     }
     
-    private void GenerateKeys(int length){
+    private void GenerateKeys(int length) throws Exception{
         KeyPairGenerator keyGen = null;
-        try {
-            keyGen = KeyPairGenerator.getInstance("RSA");
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(GenerateKeyApp.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        keyGen = KeyPairGenerator.getInstance("RSA");
         keyGen.initialize(length);
         KeyPair keys = keyGen.genKeyPair();
         publicKey = keys.getPublic();
         privateKey = keys.getPrivate();
+    }
+    
+    public void writeToFile(String path, byte[] key) throws Exception {
+        File f = new File(path);
+        f.getParentFile().mkdirs();
+
+        FileOutputStream fos = new FileOutputStream(f);
+        fos.write(key);
+        fos.flush();
+        fos.close();
     }
     
     /**
