@@ -63,10 +63,6 @@ public class SignApplication {
         //Schrijf Lengte van handtekening weg
         fOS.write(signatureData.length);  
         //schrijf de digitale handtekening zelf weg
-        for (int i = 0; i < signatureData.length ; i++)
-        {
-            System.out.println(signatureData[i]);
-        }
         fOS.write(signatureData);
         //schrijf inhoudt van INPUT.EXT weg
         fOS.write(input);

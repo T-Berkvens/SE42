@@ -32,7 +32,6 @@ import javax.crypto.NoSuchPaddingException;
  */
 public class DecryptFile {
 
-    private Cipher cipher;
     private PublicKey publicKey;
     private String pathPublicKey = "publicKey";
     private int length = 0;
@@ -48,13 +47,7 @@ public class DecryptFile {
     
     public DecryptFile() throws Exception
     {
-        try {
-            cipher = Cipher.getInstance("RSA");
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(DecryptFile.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchPaddingException ex) {
-            Logger.getLogger(DecryptFile.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        System.out.println("Enter the name of whose file you want to verrify:");
         Scanner scanner = new Scanner(System.in);
         name = scanner.nextLine();
         
@@ -88,7 +81,6 @@ public class DecryptFile {
         for (int i = 1 ; i <= length ; i ++)
         {
             signature[i-1] = bytes[i];
-            System.out.println(bytes[i]);
         }
         try {
             return decryptText(signature, publicKey);
