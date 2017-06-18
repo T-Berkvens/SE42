@@ -34,8 +34,8 @@ public class GenerateKeyApp {
         }
         keyGen.initialize(length);
         KeyPair keys = keyGen.genKeyPair();
-        PublicKey publicKey = keys.getPublic();
-        PrivateKey privateKey = keys.getPrivate();
+        publicKey = keys.getPublic();
+        privateKey = keys.getPrivate();
     }
     
     /**
