@@ -26,8 +26,8 @@ public class GenerateKeyApp {
     public GenerateKeyApp(){
         try{
             GenerateKeys(1024);
-            writeToFile("publicKey.txt", publicKey.getEncoded());
-            writeToFile("privateKey.txt", privateKey.getEncoded());
+            writeToFile("publicKey", publicKey.getEncoded());
+            writeToFile("privateKey", privateKey.getEncoded());
         }catch(Exception ex){
             ex.printStackTrace();
         }
@@ -44,8 +44,7 @@ public class GenerateKeyApp {
     }
     
     public void writeToFile(String path, byte[] key) throws Exception {
-        File f = new File(path);
-        f.getParentFile().mkdirs();
+        File f = new File("../" + path);
 
         FileOutputStream fos = new FileOutputStream(f);
         fos.write(key);
