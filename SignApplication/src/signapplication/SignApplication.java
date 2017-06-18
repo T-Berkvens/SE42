@@ -58,7 +58,7 @@ public class SignApplication {
     }
     
     public void saveFile(String author)throws Exception{
-        FileOutputStream fOS = new FileOutputStream("../INPUT(SIGNEDBY" + author + ").EXT");
+        FileOutputStream fOS = new FileOutputStream("../INPUT(SignedBy" + author + ").EXT");
         //Schrijf Lengte van handtekening weg
         fOS.write(signatureData.length);  
         //schrijf de digitale handtekening zelf weg
