@@ -8,6 +8,8 @@ package opdrachttwee;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**
@@ -22,9 +24,15 @@ public class HomeController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        System.out.println("pre crash");
     }    
     
+    @FXML
+    private void btnEncrypt(ActionEvent event){
+        
+    }
     
+    @FXML
+    private void btnDecrypt(ActionEvent event){
+        
+    }
 }
