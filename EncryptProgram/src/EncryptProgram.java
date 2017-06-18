@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.nio.file.Files;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
+import java.security.Signature;
 import java.security.spec.PKCS8EncodedKeySpec;
 import javax.crypto.Cipher;
 /**
@@ -13,11 +14,13 @@ import javax.crypto.Cipher;
 public class EncryptProgram {
     private PrivateKey privateKey;
     private byte[] input;
+    Signature signature;
     
     public EncryptProgram(String author){
         try{
             retrievePrivateKey();
             getInputFile();
+            getSignature();
             encryptWithPrivate(author);
         }catch(Exception ex){
             ex.printStackTrace();
@@ -32,11 +35,18 @@ public class EncryptProgram {
     }
     
     public void getInputFile()throws Exception{
-        input = Files.readAllBytes(new File("../input.txt").toPath());
+        input = Files.readAllBytes(new File("../INPUT.EXT").toPath());
+    }
+    
+    public byte[] getSignature() throws Exception{
+        signature = Signature.getInstance("SHA1withRSA");
+        signature.initSign(privateKey);
+        signature.update(input);
+        return signature.sign();
     }
     
     public void encryptWithPrivate(String author)throws Exception{
-        File output = new File("../INPUT(SignedBy" + author + ").EXT");
+        File output = new File("../INPUT(SIGNEDBY" + author + ").EXT");
         Cipher cipher = Cipher.getInstance("RSA");;
         cipher.init(Cipher.ENCRYPT_MODE, privateKey);
         writeToFile(output, cipher.doFinal(input));
