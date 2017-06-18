@@ -7,6 +7,7 @@ package opdrachttwee;
  */
 
 import java.net.URL;
+import java.security.SecureRandom;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +25,6 @@ public class HomeController implements Initializable {
     TextField txtPassword;
     @FXML
     TextArea txtContent;
-    
     /**
      * Initializes the controller class.
      */
@@ -40,5 +40,13 @@ public class HomeController implements Initializable {
     @FXML
     private void btnDecrypt(ActionEvent event){
         
+    }
+    
+    private byte[] generateSalt()
+    {
+        SecureRandom random = new SecureRandom();
+        byte[] bytes = new byte[20];
+        random.nextBytes(bytes);
+        return bytes;
     }
 }
