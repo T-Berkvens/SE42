@@ -15,6 +15,8 @@ import java.security.InvalidKeyException;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
+import java.security.Signature;
+import java.security.SignatureException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -32,14 +34,16 @@ public class DecryptFile {
 
     private Cipher cipher;
     private PublicKey publicKey;
-    private String pathPublicKey = "";
+    private String pathPublicKey = "publicKey";
     private int length = 0;
+    Signature signature;
+    private String name = "";
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        DecryptFile df = new DecryptFile();
+        new DecryptFile();
     }
     
     public DecryptFile() throws Exception
@@ -52,22 +56,22 @@ public class DecryptFile {
             Logger.getLogger(DecryptFile.class.getName()).log(Level.SEVERE, null, ex);
         }
         Scanner scanner = new Scanner(System.in);
-        String path = scanner.nextLine();
+        name = scanner.nextLine();
         
         File fPK = new File("../" + pathPublicKey);
-        File f = new File("../" + path);
+        File f = new File("../" + "INPUT(SignedBy" + name + ").EXT");
         if (f.exists()) {
             publicKey = readPublicKey(fPK);
             byte[] bytes = getFileInBytes(f);
-            String signature = checkSignature(bytes);
-            if (signature == path.substring(path.indexOf("SignedBy") + 8)) {
+            if (checkSignature(bytes)) {
                 System.out.println("verified");
                 byte[] bytesText = new byte[bytes.length - length];
-                for (int i = length ; i < bytes.length - length ; i++)
+                for (int i = length + 1 ; i < bytes.length ; i++)
                 {
-                    bytesText[i - length] = bytes[i];
+                    bytesText[i - length - 1] = bytes[i];
                 }
-                writeToFile(f, bytesText);
+                File writeF = new File("../" + "INPUT.EXT");
+                writeToFile(writeF, bytesText);
             }
             else  {
                 System.out.println("wrong signature");
@@ -77,26 +81,28 @@ public class DecryptFile {
     
     
     
-    private String checkSignature(byte[] bytes)
+    private boolean checkSignature(byte[] bytes)
     {
-        length = (int) bytes[0];
+        length = Math.abs((int) bytes[0]);
         byte[] signature = new byte[length];
-        String signatureDecrypted = "";
-        for (int i = 1 ; i < length ; i ++)
+        for (int i = 1 ; i <= length ; i ++)
         {
             signature[i-1] = bytes[i];
+            System.out.println(bytes[i]);
         }
         try {
-            signatureDecrypted = decryptText(signature, publicKey);
+            return decryptText(signature, publicKey);
         } catch (Exception ex) {
             Logger.getLogger(DecryptFile.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
-        return signatureDecrypted;
     }
     
-    public String decryptText(byte[] msg, PublicKey key) throws InvalidKeyException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException {
-        this.cipher.init(Cipher.DECRYPT_MODE, key);
-        return new String(cipher.doFinal(msg), "UTF-8");
+    public boolean decryptText(byte[] msg, PublicKey key) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException {
+        signature = Signature.getInstance("SHA1withRSA");
+        signature.initVerify(key);
+        signature.update(name.getBytes());
+        return signature.verify(msg);
     }
     
     private PublicKey readPublicKey(File f) throws Exception
