@@ -6,12 +6,18 @@ package opdrachttwee;
  * and open the template in the editor.
  */
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.security.SecureRandom;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
 
 /**
  * FXML Controller class
@@ -44,5 +50,20 @@ public class HomeController implements Initializable {
         byte[] bytes = new byte[20];
         random.nextBytes(bytes);
         return bytes;
+    }
+    
+    public byte[] getFileInBytes(File f) throws IOException {
+        FileInputStream fis = new FileInputStream(f);
+        byte[] fbytes = new byte[(int) f.length()];
+        fis.read(fbytes);
+        fis.close();
+        return fbytes;
+    }
+    
+    private void writeToFile(File output, byte[] toWrite) throws IllegalBlockSizeException, BadPaddingException, IOException {
+        FileOutputStream fos = new FileOutputStream(output);
+        fos.write(toWrite);
+        fos.flush();
+        fos.close();
     }
 }
