@@ -1,2 +1,5 @@
 /auction/target/
 /GenerateKeyApp/nbproject/private/
+/GenerateKeyApp/build/
+/GenerateKeyApp/dist/
+/EncryptProgram/nbproject/private/
