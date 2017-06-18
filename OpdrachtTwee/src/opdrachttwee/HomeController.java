@@ -18,6 +18,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -25,8 +27,10 @@ import javax.crypto.IllegalBlockSizeException;
  * @author Arno
  */
 public class HomeController implements Initializable {
-
-    
+    @FXML
+    TextField txtPassword;
+    @FXML
+    TextArea txtContent;
     /**
      * Initializes the controller class.
      */
